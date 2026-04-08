@@ -1,0 +1,11 @@
+---
+- name: Playbook Loop Example
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Print multiple items using a loop
+      debug:
+        msg: "{{ item }}"
+      loop:
+        - one
+        - two

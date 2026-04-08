@@ -1,0 +1,76 @@
+cat > templates/index.html.j2 << 'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site_name }}</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 0;
+        }
+        .container { 
+            background: rgba(255,255,255,0.1); 
+            padding: 40px; 
+            border-radius: 20px; 
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .status { 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        .success { background: rgba(40,167,69,0.3); border: 1px solid rgba(40,167,69,0.5); }
+        .info { background: rgba(23,162,184,0.3); border: 1px solid rgba(23,162,184,0.5); }
+        .demo-link { 
+            display: inline-block;
+            color: #fff; 
+            text-decoration: none; 
+            padding: 12px 24px; 
+            background: rgba(255,255,255,0.2); 
+            border-radius: 25px;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        .demo-link:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 {{ site_name }}</h1>
+        
+        <div class="status success">
+            ✅ Ansible Deployment Successful!
+        </div>
+        
+        <div class="status info">
+            🖥️ <strong>Server:</strong> {{ ansible_facts['hostname'] }}<br>
+            🌐 <strong>IP:</strong> {{ ansible_facts['default_ipv4']['address'] }}<br>
+            📅 <strong>Deployed:</strong> {{ ansible_date_time.date }} {{ ansible_date_time.time }}<br>
+            🐧 <strong>OS:</strong> {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}<br>
+            🐳 <strong>Ansible:</strong> v{{ ansible_version.full }}
+        </div>
+        
+        <p>
+            <a href="/demo.html" class="demo-link">
+                🌟 Explore GitHub Demo Site →
+            </a>
+        </p>
+        
+        <hr style="border: none; height: 1px; background: rgba(255,255,255,0.2); margin: 40px 0;">
+        <p style="font-size: 0.9em; opacity: 0.8;">
+            Powered by <strong>Ansible + Nginx</strong> on {{ ansible_facts['os_family'] }}
+        </p>
+    </div>
+</body>
+</html>
+EOF
